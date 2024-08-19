@@ -1,15 +1,17 @@
 {
   "name": "with-time-travel-sample-application",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "build/server.js",
   "scripts": {
-    "build": "npx tsc src/server.ts",
+    "build": "tsc",
     "start": "node build/server.js"
   },
   "devDependencies": {
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@sentry/node": "^8.26.0",
+    "@sentry/profiling-node": "^8.26.0",
     "@types/node": "^22.4.1"
   }
 }
