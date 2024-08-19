@@ -2,6 +2,18 @@ import "./instrument";
 
 import { createServer } from 'node:http';
 import * as Sentry from '@sentry/node';
+import * as inspector from "node:inspector";
+
+const session = new inspector.Session();
+session.connect();
+
+session.post('Runtime.evaluate', { expression: '2 + 2' },
+    (error, { result }) => console.log(result));
+
+session.on('inspectorNotification', () => {
+  console.log('Something happened!');
+});
+
 
 const hostname = '127.0.0.1';
 const port = 3000;
