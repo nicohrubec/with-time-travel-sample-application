@@ -4,9 +4,7 @@
   "main": "build/server.js",
   "scripts": {
     "build": "tsc",
-    "start": "node build/server.js",
-    "inspect": "node --inspect build/server.js",
-    "inspect-brk": "node --inspect-brk build/server.js"
+    "start": "node build/server.js"
   },
   "devDependencies": {
     "typescript": "^5.5.4"

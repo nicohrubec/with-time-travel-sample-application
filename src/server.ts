@@ -2,23 +2,24 @@ import "./instrument";
 
 import { createServer } from 'node:http';
 import * as Sentry from '@sentry/node';
-import * as inspector from "node:inspector";
-
-const session = new inspector.Session();
-session.connect();
-
-session.post('Runtime.evaluate', { expression: '2 + 2' },
-    (error, { result }) => console.log(result));
-
-session.on('inspectorNotification', () => {
-  console.log('Something happened!');
-});
 
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
+Sentry.withDebugger(() => {
+  const a = 'a';
+  let b = 5;
+  console.log('First call!');
+  console.log('Second call!');
+  b += 1;
+  const c = ['d', 'e', 'f'];
+  const d = {'a': 'b'};
+  Sentry.captureException(new Error());
+})
+
 const server = createServer((req, res) => {
+  /*
   try {
     for (let i = 0; i < 3; i ++) {
       console.log('i ==', i);
@@ -34,8 +35,7 @@ const server = createServer((req, res) => {
     throw e;
   }
 
-
-
+   */
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end('Hello World');
